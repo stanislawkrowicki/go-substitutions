@@ -27,7 +27,7 @@ type Response struct {
 func GetRequestDate() string {
 	date := time.Now()
 	if date.Hour() >= DayThresholdHour {
-		date.AddDate(0, 0, 1)
+		date = date.AddDate(0, 0, 1)
 	}
 
 	return date.Format("2006-01-02")
