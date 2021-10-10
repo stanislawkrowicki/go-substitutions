@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/joho/godotenv"
-	"go-substitutions/cmd/memory"
-	"go-substitutions/cmd/notifications"
-	"go-substitutions/cmd/tools"
+	"go-substitutions/pkg/memory"
+	"go-substitutions/pkg/notifications"
+	"go-substitutions/pkg/tools"
 	"log"
 	"strings"
 	"time"

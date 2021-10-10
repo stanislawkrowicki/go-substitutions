@@ -3,7 +3,7 @@ package memory
 import (
 	"encoding/json"
 	"errors"
-	"go-substitutions/cmd/tools"
+	"go-substitutions/pkg/tools"
 	"io/ioutil"
 	"os"
 	"strings"
