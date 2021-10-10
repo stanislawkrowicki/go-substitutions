@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/joho/godotenv"
+	"go-substitutions/pkg/env"
 	"go-substitutions/pkg/memory"
 	"go-substitutions/pkg/notifications"
 	"go-substitutions/pkg/tools"
@@ -22,7 +22,7 @@ const (
 )
 
 func main() {
-	err := godotenv.Load()
+	err := env.LoadEnv()
 	if err != nil {
 		_ = notifications.Show(CantLoadEnv, CantLoadEnv)
 		log.Fatal(CantLoadEnv)
