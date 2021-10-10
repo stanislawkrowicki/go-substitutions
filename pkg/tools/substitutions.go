@@ -2,7 +2,7 @@ package tools
 
 import (
 	"github.com/antchfx/htmlquery"
-	httpapi "go-substitutions/cmd/http-api"
+	httpapi "go-substitutions/pkg/http-api"
 )
 
 type Substitutions struct {
