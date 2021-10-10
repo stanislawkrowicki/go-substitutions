@@ -7,6 +7,8 @@ To run the app, you need an env file. It should be filled like this:
 ```dotenv
 CLASS=YOUR_CLASS
 SUBSTITUTIONS_API=API_URL
+DISCORD_TOKEN=YOUR_BOT_TOKEN
+DISCORD_GUILD=YOUR_DISCORD_GUILD
 ```
 
 I didn't put the API URL in the code for security reasons.
