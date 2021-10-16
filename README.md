@@ -1,7 +1,8 @@
 # go-substitutions
 Go-substitutions listens for new substitutions on school's webpage
 
-It is designed to run on Windows 10 only.
+The notification (toast) service is designed to run on Windows 10 only,
+however, the discord-service can run locally on every OS, or deployed to Heroku.
 
 To run the app, you need an env file. It should be filled like this:
 ```dotenv
