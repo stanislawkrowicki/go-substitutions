@@ -6,17 +6,12 @@ import (
 	"go-substitutions/pkg/tools"
 	"log"
 	"os"
-	"time"
 )
 
 const (
 	Github                   = "https://github.com/stanislawkrowicki/go-substitutions"
 	SubstitutionNewTitle     = "Hey there! On %s there are some changes:"
 	SubstitutionChangedTitle = "Hey! Changes on %s have been made:"
-	ErrorTitle               = "Something went wrong."
-	ErrorText                = "An error occurred. %s"
-	ErrorDelay               = 1 * time.Minute
-	Delay                    = 5 * time.Minute
 	NoChanges                = "There aren't any changes."
 )
 

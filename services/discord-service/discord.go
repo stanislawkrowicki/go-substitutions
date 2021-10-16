@@ -5,9 +5,12 @@ import (
 	"github.com/bwmarrin/discordgo"
 	discordService "go-substitutions/pkg/discord-service"
 	"go-substitutions/pkg/env"
+	"go-substitutions/pkg/memory"
+	"go-substitutions/pkg/tools"
 	"log"
 	"os"
 	"os/signal"
+	"time"
 )
 
 var (
@@ -30,6 +33,9 @@ var (
 
 const (
 	CantLoadEnv = "Failed to load .env file."
+	ErrorText   = "An error occurred. %s"
+	ErrorDelay  = 1 * time.Minute
+	Delay       = 5 * time.Minute
 )
 
 var s *discordgo.Session
@@ -59,6 +65,43 @@ func init() {
 	})
 }
 
+func listen() {
+	log.Println("Listening for substitutions...")
+	for {
+		subst, err := tools.GetSubstitutions(tools.GetRequestDate())
+		if err != nil {
+			log.Printf(ErrorText, err)
+			time.Sleep(ErrorDelay)
+			continue
+		}
+
+		if subst == nil {
+			time.Sleep(Delay)
+			continue
+		}
+
+		exists, err := memory.Exists(*subst)
+		if err != nil {
+			log.Printf(ErrorText, err)
+			time.Sleep(ErrorDelay)
+			continue
+		}
+
+		if !exists {
+			changed, err := memory.Save(*subst)
+			if err != nil {
+				log.Printf(ErrorText, err)
+				time.Sleep(ErrorDelay)
+				continue
+			}
+
+			discordService.SendSubstitutions(s, subst, changed)
+		}
+
+		time.Sleep(Delay)
+	}
+}
+
 func main() {
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Println("Bot is up!")
@@ -76,6 +119,8 @@ func main() {
 			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
 		}
 	}
+
+	go listen()
 
 	defer s.Close()
 
