@@ -17,7 +17,7 @@ I didn't put the API URL in the code for security reasons.
 
 Go-substitutions runs 24/7, so it's a good idea to have it run without terminal. To achieve this, build the app with:
 ```
-go build -ldflags "-H windowsgui" cmd/toast-service/toast.go
+go build -ldflags "-H windowsgui" cmd/toast-service/main.go
 ```
 
 Then you can for example add a shortcut to the binary into your shell:startup, so it starts every time you turn on your PC.
