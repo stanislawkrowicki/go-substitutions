@@ -3,6 +3,8 @@ module go-substitutions
 // +heroku goVersion go1.17
 go 1.17
 
+// +heroku install services/discord-service
+
 require (
 	github.com/antchfx/htmlquery v1.2.4
 	github.com/bwmarrin/discordgo v0.23.3-0.20211010150959-f0b7e81468f7
