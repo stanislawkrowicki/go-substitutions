@@ -43,10 +43,7 @@ var s *discordgo.Session
 func init() { flag.Parse() }
 
 func init() {
-	err := env.LoadEnv()
-	if err != nil {
-		log.Fatal(CantLoadEnv)
-	}
+	_ = env.LoadEnv()
 }
 
 func init() {
