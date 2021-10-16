@@ -65,7 +65,7 @@ func init() {
 func listen() {
 	log.Println("Listening for substitutions...")
 	for {
-		subst, err := tools.GetSubstitutions("2021-09-29")
+		subst, err := tools.GetSubstitutions(tools.GetRequestDate())
 		if err != nil {
 			log.Printf(ErrorText, err)
 			time.Sleep(ErrorDelay)
