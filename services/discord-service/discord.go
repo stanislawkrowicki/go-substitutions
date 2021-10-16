@@ -20,13 +20,13 @@ var (
 			Description: "Bot's source code",
 		},
 		{
-			Name: "changes",
+			Name:        "changes",
 			Description: "Changes for today/tomorrow",
 		},
 	}
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
-		"source": discordService.SourceCode,
+		"source":  discordService.SourceCode,
 		"changes": discordService.SendSubstitutionsOnCommand,
 	}
 )
