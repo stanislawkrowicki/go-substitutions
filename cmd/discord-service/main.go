@@ -32,10 +32,9 @@ var (
 )
 
 const (
-	CantLoadEnv = "Failed to load .env file."
-	ErrorText   = "An error occurred. %s"
-	ErrorDelay  = 1 * time.Minute
-	Delay       = 5 * time.Minute
+	ErrorText  = "An error occurred. %s"
+	ErrorDelay = 1 * time.Minute
+	Delay      = 5 * time.Minute
 )
 
 var s *discordgo.Session
