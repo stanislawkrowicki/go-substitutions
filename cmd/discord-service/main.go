@@ -123,7 +123,12 @@ func main() {
 
 	go listen()
 
-	defer s.Close()
+	defer func(s *discordgo.Session) {
+		err := s.Close()
+		if err != nil {
+			log.Println("Failed to gracefully shutdown the bot.")
+		}
+	}(s)
 
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)
