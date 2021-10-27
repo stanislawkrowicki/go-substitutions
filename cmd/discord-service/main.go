@@ -92,7 +92,12 @@ func listen() {
 				continue
 			}
 
-			discordService.SendSubstitutions(s, subst, changed)
+			if err := discordService.SendSubstitutions(s, subst, changed); err != nil {
+				log.Printf("Error for SendSubstitutions: %v\n", err)
+				if err := memory.DeleteLast(); err != nil {
+					log.Printf("SendSubstitutions errored and failed to DeleteLast substitutions.")
+				}
+			}
 		}
 
 		time.Sleep(Delay)

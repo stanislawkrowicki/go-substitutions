@@ -57,9 +57,23 @@ func SendSubstitutionsOnCommand(s *discordgo.Session, i *discordgo.InteractionCr
 
 }
 
-func SendSubstitutions(s *discordgo.Session, substitutions *tools.Substitutions, changed bool) {
-	_, err := s.ChannelMessageSendEmbed(os.Getenv("DISCORD_CHANNEL_ID"), PrepareEmbed(changed, substitutions))
+func SendSubstitutions(s *discordgo.Session, substitutions *tools.Substitutions, changed bool) error {
+	channel, err := s.Channel(os.Getenv("DISCORD_CHANNEL_ID"))
 	if err != nil {
-		log.Printf("Error while sending substitutions embed: %v\n", err)
+		return fmt.Errorf("Error while getting messages channel: %v\n", err)
 	}
+
+	lastMessage, err := s.ChannelMessage(channel.ID, channel.LastMessageID)
+	isLastMessageSubstitution := len(lastMessage.Embeds) > 0 && lastMessage.Author.ID == s.State.User.ID
+	if isLastMessageSubstitution && lastMessage.Embeds[0].Title == PrepareTitleString(substitutions.Date, changed) {
+		log.Println("These substitutions were already sent to the channel.")
+		return nil
+	}
+
+	_, err = s.ChannelMessageSendEmbed(channel.ID, PrepareEmbed(changed, substitutions))
+	if err != nil {
+		return fmt.Errorf("Error while sending substitutions embed: %v\n", err)
+	}
+
+	return nil
 }
