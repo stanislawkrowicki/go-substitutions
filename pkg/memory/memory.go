@@ -91,3 +91,21 @@ func Save(substitution tools.Substitutions) (bool, error) {
 
 	return changed, nil
 }
+
+func DeleteLast() error {
+	substitutions, err := read()
+	if err != nil && err.Error() != CantOpen {
+		return err
+	}
+
+	if len(substitutions) > 0 {
+		substitutions = substitutions[:len(substitutions)-1]
+	}
+
+	if err := write(substitutions); err != nil {
+		return err
+	}
+
+	return nil
+
+}
